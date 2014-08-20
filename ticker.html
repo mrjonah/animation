@@ -13,7 +13,7 @@
 
 /* - S L I D E S - */
 
-#tickerSlides .slides {
+#tickerSlides {
     margin: 0;
     padding: 0;
     width: 1923px;
@@ -21,7 +21,7 @@
     position: relative;
     box-shadow: 0 0 3px hsla(250, 40%, 30%, 0.8);
 }
-#tickerSlides .slides li {
+#tickerSlides li {
     position: absolute;
     left: 0;
     top: 0;
@@ -34,7 +34,7 @@
     -o-transition:      opacity 0.3s ease-out;
     transition:         opacity 0.3s ease-out;
 }
-#tickerSlides .slides .active {
+#tickerSlides .active {
     opacity: 1;
     filter: alpha(opacity=100);
     -webkit-transition: opacity 0.3s ease-out;
@@ -46,175 +46,153 @@
 </style>
 <script src="yui-min.js"></script>
 </head>
+<ul id="tickerSlides" class="slides"></ul>
 
 <script>
-YUI().use('gallery-preload', function(Y) {
-  Y.preload ([
-    'http://sports.zenfs.com/49ers/r/rA00.png',
-    'http://sports.zenfs.com/49ers/r/rA01.png',
-    'http://sports.zenfs.com/49ers/r/rA02.png'
-  ]); 
-});
-</script>
-<div id="tickerSlides">
-    <ul class="slides">
-        <li class="active">
-            <img src="Flickr_Cards-01.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA00.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA01.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA02.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA03.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA04.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA05.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA06.png">
-        </li>
-        <li>
-            <img src="Flickr_Cards-02.png">
-        </li>        
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA07.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA08.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA09.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA10.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA11.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA12.png">
-        </li>
-        <li>
-            <img src="Flickr_Cards-03.png">
-        </li>        
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA13.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA14.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA15.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA16.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA17.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA18.png">
-        </li>
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA19.png">
-        </li>
-        <li>
-            <img src="Flickr_Cards-04.png">
-        </li>        
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA20.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA21.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA22.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA23.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA24.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA25.png">
-        </li> 
-        <li>
-            <img src="Flickr_Cards-05.png">
-        </li>        
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA26.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA27.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA28.png">
-        </li>                                             
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA29.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA30.png">
-        </li> 
-        <li>
-            <img src="http://sports.zenfs.com/49ers/r/rA31.png">
-        </li>   
-        <li>
-            <img src="Flickr_Cards-06.png">
-        </li>                                          
-    </ul>
-</div>
-
-<script>
-YUI().use('node', 'paginator', 'gallery-timer', function (Y) {
+YUI().use('node', 'paginator', 'gallery-timer', function restart(Y) {
     var ticker = Y.one('#tickerSlides'),
-        slides = ticker.all('.slides li'),
+        stadiumConfig = {
+            flickr: {
+                name: 'flickr',
+                basePath: 'http://sports.zenfs.com/49ers/r/rA%d.png',
+                lastPage: 31
+            },
+            leaderboard: {
+                name: 'leaderboard',
+                basePath: 'http://sports.zenfs.com/49ers/l/lA%d.png',
+                lastPage: 24
+            },
+            games: {
+                name: 'game',
+                basePath: 'http://sports.zenfs.com/49ers/n/nA%d.png',
+                lastPage: 15
+            }
+        },
         selectedClass = 'active',
-        pg = new Y.Paginator({
-            itemsPerPage: 1,
-            totalItems: slides.size()
-        });
+        isImageLoaded = function(img) {
+            return img.get('complete') && img.get('naturalWidth') !== 'undefined';
+        },
+        addImages = function() {
+            var counter,
+                updatedCount,
+                interstitualCount,
+                interstitualRepeat = 6,
+                applet,
+                appletConfig,
+                lastPage;
 
-    pg.after('pageChange', function (e) {
-        var page = e.newVal;
+            for(applet in stadiumConfig) {
+                counter = -1;
+                updatedCount = 0;
+                interstitualCount = 1;
+                appletConfig = stadiumConfig[applet];
+                lastPage = appletConfig.lastPage;
 
-        // decrement page since nodeLists are 0 based and
-        // paginator is 1 based
-        page--;
+                while(counter++ < lastPage) {
+                    updatedCount = counter > 9 ? counter : '0' + counter;
+                    // If it is the first image or is divisible by 6, add an interstitual image
+                    if(interstitualCount < 6 && appletConfig.name === 'flickr' && (counter === 0 || counter === stadiumConfig.flickr.lastPage || (counter % interstitualRepeat === 0 && counter < stadiumConfig.flickr.lastPage))) {
+                        ticker.appendChild('<li><img src="' + 'Flickr_Cards-0' + interstitualCount + '.png"></li>');
+                        interstitualCount += 1;
+                    } else {
+                        ticker.appendChild('<li><img src="' + appletConfig.basePath.replace('%d', updatedCount, 'gi') + '"></li>');
+                    }
+                }
+            }
+        },
+        createCarousel = function createCarousel() {
+            createCarousel.count = createCarousel.count || 0;
 
-        // clear anything active
-        slides.removeClass(selectedClass);
+            var firstSlide = ticker.one(':first-child'),
+                firstSlideImg = firstSlide.one(':first-child'),
+                slides,
+                numSlides;
 
-        // make the new item active
-        slides.item(page).addClass(selectedClass);
-    });
+            if(!isImageLoaded(firstSlideImg) && createCarousel.count < 12) {
+                createCarousel.count += 1;
+                setTimeout(function() {
+                    createCarousel();
+                }, 250);
+                return;
+            }
 
-    // create a timer to go to the next slide automatically
-    autoPlay = new Y.Timer({
-        length: 6000,
-        repeatCount: 0});
+            createCarousel.count = 0;
 
-    autoPlay.after('timer', function (e) {
-        if (pg.hasNextPage()) {
-            pg.nextPage();
-        } else {
-            pg.set('page', 1);
-        }
-    });
+            firstSlide.addClass(selectedClass);
 
-    // start the autoPlay timer
-    autoPlay.start();
+            slides = ticker.all('li');
+            numSlides = slides.size();
 
+            pg = new Y.Paginator({
+                itemsPerPage: 1,
+                totalItems: numSlides
+            });
+
+            // create a timer to go to the next slide automatically
+            autoPlay = new Y.Timer({
+                length: 6000,
+                repeatCount: 0
+            });
+
+            autoPlay.after('timer', function recheckPage(e) {
+                if (pg.hasNextPage()) {
+                    pg.nextPage();
+                } else {
+                    pg.set('page', 1);
+                }
+            });
+
+            pg.after('pageChange', function pageChange(e) {
+                pageChange.count = pageChange.count || 0;
+
+                var page = e.newVal,
+                    currentImage = slides.item(page - 1).one(':first-child');
+
+                if(!isImageLoaded(currentImage)) {
+                    if(pageChange.count <= 16) {
+                        autoPlay.stop();
+                        pageChange.count += 1;
+                        setTimeout(function() {
+                            pageChange(e);
+                        }, 250);
+                        return;
+                    } else {
+                        if (pg.hasNextPage()) {
+                            pg.nextPage();
+                            return;
+                        }
+                    }
+                }
+
+                autoPlay.start();
+                pageChange.count = 0;
+
+                // decrement page since nodeLists are 0 based and
+                // paginator is 1 based
+                page--;
+
+                // clear anything active
+                slides.removeClass(selectedClass);
+
+                // make the new item active
+                slides.item(page).addClass(selectedClass);
+
+                if(page >= numSlides -1) {
+                    ticker.get('childNodes').remove();
+                    autoPlay.stop();
+                    createCarouselPage();
+                }
+            });
+
+            // start the autoPlay timer
+            autoPlay.start();
+        },
+        createCarouselPage = function() {
+            addImages();
+            createCarousel();
+        };
+
+    createCarouselPage();
 });
 </script>
 </body>
