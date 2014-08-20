@@ -100,6 +100,13 @@ YUI().use('node', 'paginator', 'gallery-timer', function restart(Y) {
                 }
             }
         },
+        deleteWindowProp = function(prop) {
+            window[prop] = null;
+
+            try{
+                delete window[prop];
+            } catch(e){}
+        }
         createCarousel = function createCarousel() {
             createCarousel.count = createCarousel.count || 0;
 
@@ -123,13 +130,13 @@ YUI().use('node', 'paginator', 'gallery-timer', function restart(Y) {
             slides = ticker.all('li');
             numSlides = slides.size();
 
-            pg = new Y.Paginator({
+            window.pg = new Y.Paginator({
                 itemsPerPage: 1,
                 totalItems: numSlides
             });
 
             // create a timer to go to the next slide automatically
-            autoPlay = new Y.Timer({
+            window.autoPlay = new Y.Timer({
                 length: 6000,
                 repeatCount: 0
             });
@@ -180,6 +187,8 @@ YUI().use('node', 'paginator', 'gallery-timer', function restart(Y) {
                 if(page >= numSlides -1) {
                     ticker.get('childNodes').remove();
                     autoPlay.stop();
+                    deleteWindowProp('pg');
+                    deleteWindowProp('autoPlay');
                     createCarouselPage();
                 }
             });
