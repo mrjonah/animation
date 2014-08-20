@@ -1,0 +1,195 @@
+<html>
+<head>
+<title>49er ticker</title>
+
+
+<style>
+#tickerSlides {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    zoom: 1; *display: inline;
+}
+
+
+/* - S L I D E S - */
+
+#tickerSlides .slides {
+    margin: 0;
+    padding: 0;
+    width: 1923px;
+    height: 1096px;
+    position: relative;
+    box-shadow: 0 0 3px hsla(250, 40%, 30%, 0.8);
+}
+#tickerSlides .slides li {
+    position: absolute;
+    left: 0;
+    top: 0;
+    list-style: none;
+    display: inline;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 0.3s ease-out;
+    -moz-transition:    opacity 0.3s ease-out;
+    -o-transition:      opacity 0.3s ease-out;
+    transition:         opacity 0.3s ease-out;
+}
+#tickerSlides .slides .active {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -webkit-transition: opacity 0.3s ease-out;
+    -moz-transition:    opacity 0.3s ease-out;
+    -o-transition:      opacity 0.3s ease-out;
+    transition:         opacity 0.3s ease-out;
+}
+
+</style>
+<script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
+</head>
+
+<div id="tickerSlides">
+    <ul class="slides">
+        <li class="active">
+            <img src="http://sports.zenfs.com/49ers/r/rA00.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA01.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA02.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA03.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA04.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA05.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA06.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA07.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA08.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA09.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA10.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA11.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA12.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA13.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA14.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA15.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA16.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA17.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA18.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA19.png">
+        </li>
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA20.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA21.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA22.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA23.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA24.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA25.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA26.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA27.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA28.png">
+        </li>                                             
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA29.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA30.png">
+        </li> 
+        <li>
+            <img src="http://sports.zenfs.com/49ers/r/rA31.png">
+        </li>                                     
+    </ul>
+</div>
+
+<script>
+YUI().use('node', 'paginator', 'gallery-timer', function (Y) {
+    var ticker = Y.one('#tickerSlides'),
+        slides = ticker.all('.slides li'),
+        selectedClass = 'active',
+        pg = new Y.Paginator({
+            itemsPerPage: 1,
+            totalItems: slides.size()
+        });
+
+    pg.after('pageChange', function (e) {
+        var page = e.newVal;
+
+        // decrement page since nodeLists are 0 based and
+        // paginator is 1 based
+        page--;
+
+        // clear anything active
+        slides.removeClass(selectedClass);
+
+        // make the new item active
+        slides.item(page).addClass(selectedClass);
+    });
+
+    // create a timer to go to the next slide automatically
+    autoPlay = new Y.Timer({
+        length: 5000,
+        repeatCount: 0});
+
+    autoPlay.after('timer', function (e) {
+        if (pg.hasNextPage()) {
+            pg.nextPage();
+        } else {
+            pg.set('page', 1);
+        }
+    });
+
+    // start the autoPlay timer
+    autoPlay.start();
+
+});
+</script>
+</body>
+</html>
