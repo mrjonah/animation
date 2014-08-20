@@ -142,6 +142,7 @@ YUI().use('node', 'paginator', 'gallery-timer', function restart(Y) {
             });
 
             autoPlay.after('timer', function recheckPage(e) {
+                autoPlay.stop();
                 if (pg.hasNextPage()) {
                     pg.nextPage();
                 } else {
@@ -156,7 +157,6 @@ YUI().use('node', 'paginator', 'gallery-timer', function restart(Y) {
                     currentImage = slides.item(page - 1).one(':first-child');
 
                 if(!isImageLoaded(currentImage)) {
-                    autoPlay.stop();
                     if(pageChange.count <= 16) {
                         pageChange.count += 1;
                         setTimeout(function() {
