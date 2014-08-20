@@ -149,8 +149,8 @@ YUI().use('node', 'paginator', 'gallery-timer', function restart(Y) {
                     currentImage = slides.item(page - 1).one(':first-child');
 
                 if(!isImageLoaded(currentImage)) {
+                    autoPlay.stop();
                     if(pageChange.count <= 16) {
-                        autoPlay.stop();
                         pageChange.count += 1;
                         setTimeout(function() {
                             pageChange(e);
