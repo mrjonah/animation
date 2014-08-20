@@ -11,7 +11,6 @@
     zoom: 1; *display: inline;
 }
 
-
 /* - S L I D E S - */
 
 #tickerSlides .slides {
@@ -45,12 +44,24 @@
 }
 
 </style>
-<script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>
+<script src="yui-min.js"></script>
 </head>
 
+<script>
+YUI().use('gallery-preload', function(Y) {
+  Y.preload ([
+    'http://sports.zenfs.com/49ers/r/rA00.png',
+    'http://sports.zenfs.com/49ers/r/rA01.png',
+    'http://sports.zenfs.com/49ers/r/rA02.png'
+  ]); 
+});
+</script>
 <div id="tickerSlides">
     <ul class="slides">
         <li class="active">
+            <img src="Flickr_Cards-01.png">
+        </li>
+        <li>
             <img src="http://sports.zenfs.com/49ers/r/rA00.png">
         </li>
         <li>
@@ -72,6 +83,9 @@
             <img src="http://sports.zenfs.com/49ers/r/rA06.png">
         </li>
         <li>
+            <img src="Flickr_Cards-02.png">
+        </li>        
+        <li>
             <img src="http://sports.zenfs.com/49ers/r/rA07.png">
         </li>
         <li>
@@ -89,6 +103,9 @@
         <li>
             <img src="http://sports.zenfs.com/49ers/r/rA12.png">
         </li>
+        <li>
+            <img src="Flickr_Cards-03.png">
+        </li>        
         <li>
             <img src="http://sports.zenfs.com/49ers/r/rA13.png">
         </li>
@@ -111,6 +128,9 @@
             <img src="http://sports.zenfs.com/49ers/r/rA19.png">
         </li>
         <li>
+            <img src="Flickr_Cards-04.png">
+        </li>        
+        <li>
             <img src="http://sports.zenfs.com/49ers/r/rA20.png">
         </li> 
         <li>
@@ -129,6 +149,9 @@
             <img src="http://sports.zenfs.com/49ers/r/rA25.png">
         </li> 
         <li>
+            <img src="Flickr_Cards-05.png">
+        </li>        
+        <li>
             <img src="http://sports.zenfs.com/49ers/r/rA26.png">
         </li> 
         <li>
@@ -145,7 +168,10 @@
         </li> 
         <li>
             <img src="http://sports.zenfs.com/49ers/r/rA31.png">
-        </li>                                     
+        </li>   
+        <li>
+            <img src="Flickr_Cards-06.png">
+        </li>                                          
     </ul>
 </div>
 
@@ -175,7 +201,7 @@ YUI().use('node', 'paginator', 'gallery-timer', function (Y) {
 
     // create a timer to go to the next slide automatically
     autoPlay = new Y.Timer({
-        length: 5000,
+        length: 6000,
         repeatCount: 0});
 
     autoPlay.after('timer', function (e) {
