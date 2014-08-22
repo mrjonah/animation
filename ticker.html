@@ -111,7 +111,7 @@ YUI().use('node', 'paginator', 'gallery-timer', function restart(Y) {
                 slideImages,
                 numSlides;
 
-            if(!isImageLoaded(firstSlideImg) && createCarousel.count < 8) {
+            if(!isImageLoaded(firstSlideImg) && createCarousel.count < 40) {
                 createCarousel.count += 1;
                 setTimeout(function() {
                     createCarousel();
@@ -154,7 +154,7 @@ YUI().use('node', 'paginator', 'gallery-timer', function restart(Y) {
                     currentImage = slides.item(page - 1).one(':first-child');
 
                 if(!isImageLoaded(currentImage)) {
-                    if(pageChange.count <= 8) {
+                    if(pageChange.count <= 40) {
                         pageChange.count += 1;
                         setTimeout(function() {
                             pageChange(e);
